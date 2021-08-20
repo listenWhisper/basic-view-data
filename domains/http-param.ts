@@ -75,12 +75,12 @@ function valueToString(value: string|number|boolean): string {
     return `${value}`;
 }
 
-export class HttpParam{
+export class HttpParams{
     // @ts-ignore
     private map: Map<string, string[]>|null;
     private encoder: HttpParameterCodec;
     private updates: Update[]|null = null;
-    private cloneFrom: HttpParam|null = null;
+    private cloneFrom: HttpParams|null = null;
 
     constructor(options: HttpParamsOptions = {} as HttpParamsOptions) {
         this.encoder = options.encoder || new HttpUrlEncodingCodec();
@@ -123,12 +123,12 @@ export class HttpParam{
         return Array.from(this.map!.keys());
     }
 
-    append(param: string, value: string|number|boolean): HttpParam {
+    append(param: string, value: string|number|boolean): HttpParams {
         return this.clone({param, value, op: 'a'});
     }
 
     appendAll(params: {[param: string]: string|number|boolean|ReadonlyArray<string|number|boolean>}):
-        HttpParam {
+        HttpParams {
         const updates: Update[] = [];
         Object.keys(params).forEach(param => {
             const value = params[param];
@@ -143,11 +143,11 @@ export class HttpParam{
         return this.clone(updates);
     }
 
-    set(param: string, value: string|number|boolean): HttpParam {
+    set(param: string, value: string|number|boolean): HttpParams {
         return this.clone({param, value, op: 's'});
     }
 
-    delete(param: string, value?: string|number|boolean): HttpParam {
+    delete(param: string, value?: string|number|boolean): HttpParams {
         return this.clone({param, value, op: 'd'});
     }
 
@@ -163,8 +163,8 @@ export class HttpParam{
             .join('&');
     }
 
-    private clone(update: Update|Update[]): HttpParam {
-        const clone = new HttpParam({encoder: this.encoder} as HttpParamsOptions);
+    private clone(update: Update|Update[]): HttpParams {
+        const clone = new HttpParams({encoder: this.encoder} as HttpParamsOptions);
         clone.cloneFrom = this.cloneFrom || this;
         clone.updates = (this.updates || []).concat(update);
         return clone;
