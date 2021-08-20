@@ -1,0 +1,22 @@
+{
+	"name": "basic-view-data",
+	"version": "0.0.5",
+	"description": "basic-view-data",
+	"keywords": [
+		"基础视图数据"
+	],
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"view-publish": "npm publish",
+		"patch-publish": "npm version patch && npm publish"
+	},
+	"repository": {
+		"type": "git",
+		"url": ""
+	},
+	"devDependencies": {
+		"typescript": "^3.0.0"
+	},
+	"author": "listenWhiper",
+	"license": ""
+}
