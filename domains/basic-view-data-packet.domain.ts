@@ -1,5 +1,5 @@
 import {Util} from '../share';
-
+// 1323
 export class BasicViewDataPacket{
   private readonly __property: BasicViewDataPacketProperty;
 
