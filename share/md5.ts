@@ -211,7 +211,6 @@ export class Md5Util {
     }
     return str;
   }
-
   /*
    * Convert an array of little-endian words to a hex string.
    */
