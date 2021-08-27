@@ -1,13 +1,8 @@
 export class Md5Util {
-  private static hexcase = 0;  /* hex output format. 0 - lowercase; 1 - uppercase        */
-  private static b64pad = '='; /* base-64 pad character. "=" for strict RFC compliance   */
-  private static chrsz = 8;  /* bits per input character. 8 - ASCII; 16 - Unicode      */
+  private static hexcase = 0;
+  private static b64pad = '=';
+  private static chrsz = 8;
 
-
-  /*
-   * These are the functions you'll usually want to call
-   * They take string arguments and return either hex or base-64 encoded strings
-   */
   static hex_md5(s: string) {
     return Md5Util.binl2hex(Md5Util.core_md5(Md5Util.str2binl(s), s.length * Md5Util.chrsz));
   }
@@ -32,24 +27,20 @@ export class Md5Util {
     return Md5Util.binl2str(Md5Util.core_hmac_md5(key, data));
   }
 
-  /*
-   * Calculate the MD5 of an array of little-endian words, and a bit length
-   */
   private static core_md5(x, len) {
-    /* append padding */
     x[len >> 5] |= 0x80 << ((len) % 32);
     x[(((len + 64) >>> 9) << 4) + 14] = len;
 
-    var a = 1732584193;
-    var b = -271733879;
-    var c = -1732584194;
-    var d = 271733878;
+    let a = 1732584193;
+    let b = -271733879;
+    let c = -1732584194;
+    let d = 271733878;
 
-    for (var i = 0; i < x.length; i += 16) {
-      var olda = a;
-      var oldb = b;
-      var oldc = c;
-      var oldd = d;
+    for (let i = 0; i < x.length; i += 16) {
+      let olda = a;
+      let oldb = b;
+      let oldc = c;
+      let oldd = d;
 
       a = Md5Util.md5_ff(a, b, c, d, x[i], 7, -680876936);
       d = Md5Util.md5_ff(d, a, b, c, x[i + 1], 12, -389564586);
@@ -128,9 +119,6 @@ export class Md5Util {
 
   }
 
-  /*
-   * These functions implement the four basic operations the algorithm uses.
-   */
   private static md5_cmn(q, a, b, x, s, t) {
     return Md5Util.safe_add(Md5Util.bit_rol(Md5Util.safe_add(Md5Util.safe_add(a, q), Md5Util.safe_add(x, t)), s), b);
   }
@@ -151,9 +139,6 @@ export class Md5Util {
     return Md5Util.md5_cmn(c ^ (b | (~d)), a, b, x, s, t);
   }
 
-  /*
-   * Calculate the HMAC-MD5, of a key and some data
-   */
   private static core_hmac_md5(key, data) {
     let bkey = Md5Util.str2binl(key);
     if (bkey.length > 16) {
@@ -170,27 +155,16 @@ export class Md5Util {
     return Md5Util.core_md5(opad.concat(hash), 512 + 128);
   }
 
-  /*
-   * Add integers, wrapping at 2^32. This uses 16-bit operations internally
-   * to work around bugs in some JS interpreters.
-   */
   private static safe_add(x, y) {
     let lsw = (x & 0xFFFF) + (y & 0xFFFF);
     let msw = (x >> 16) + (y >> 16) + (lsw >> 16);
     return (msw << 16) | (lsw & 0xFFFF);
   }
 
-  /*
-   * Bitwise rotate a 32-bit number to the left.
-   */
   private static bit_rol(num, cnt) {
     return (num << cnt) | (num >>> (32 - cnt));
   }
 
-  /*
-   * Convert a string to an array of little-endian words
-   * If chrsz is ASCII, characters >255 have their hi-byte silently ignored.
-   */
   private static str2binl(str) {
     let bin = Array();
     let mask = (1 << Md5Util.chrsz) - 1;
@@ -200,9 +174,6 @@ export class Md5Util {
     return bin;
   }
 
-  /*
-   * Convert an array of little-endian words to a string
-   */
   private static binl2str(bin) {
     let str = '';
     let mask = (1 << Md5Util.chrsz) - 1;
@@ -211,9 +182,7 @@ export class Md5Util {
     }
     return str;
   }
-  /*
-   * Convert an array of little-endian words to a hex string.
-   */
+
   private static binl2hex(binarray) {
     let hex_tab = Md5Util.hexcase ? '0123456789ABCDEF' : '0123456789abcdef';
     let str = '';
@@ -224,9 +193,6 @@ export class Md5Util {
     return str;
   }
 
-  /*
-   * Convert an array of little-endian words to a base-64 string
-   */
   private static binl2b64(binarray) {
     let tab = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
     let str = '';
