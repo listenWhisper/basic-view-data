@@ -36,7 +36,7 @@ export class BasicViewDataPacketList<T extends BasicViewDataPacket> extends Basi
         return this.getItem(this.count -1);
     }
 
-    public append(item: T | BasicViewDataPacketList<T> | T[]){
+    public append(item: T | BasicViewDataPacketList<T> | T[]): any{
         if(!item){
             return this;
         }

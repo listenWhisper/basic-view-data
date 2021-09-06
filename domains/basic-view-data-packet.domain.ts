@@ -1,4 +1,4 @@
-import {Util} from '../share';
+import {UtilTools} from '../share';
 export class BasicViewDataPacket{
   private readonly __property: BasicViewDataPacketProperty;
 
@@ -87,7 +87,7 @@ export class BasicViewDataPacketProperty {
   indexOfList: number;
 
   constructor() {
-    this.uuid = Util.uuid();
+    this.uuid = UtilTools.uuid();
     this.isActive = false;
     this.isChecked = false;
     this.isLoading = false;

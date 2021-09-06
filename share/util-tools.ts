@@ -1,4 +1,5 @@
-export class Util{
+export class UtilTools {
+
     /**
      * 唯一标识生成
      */
@@ -24,6 +25,16 @@ export class Util{
          a.click();
      }
 
+     public static pathLink(url: string, target: string = '_blank'): void{
+        if(!url){
+            console.error('路径未知');
+            return;
+        }
+        const a = document.createElement('a');
+        a.href = url;
+        a.target = target;
+     }
+
     /**
      * 文件打印
      * @param url 文件地址
@@ -40,15 +51,18 @@ export class Util{
         iframe.style.display ='none';
         parent.append(iframe);
 
-        const script = iframe.contentDocument.createElement('script');
-        script.innerHTML = `
-            (function () {
-                window.print();
-                window.onafterprint = () => {
-                    window.parent.document.querySelector('#view-print-param').remove();
-                };
-            }())
-        `;
-        iframe.contentDocument.body.append(script);
+        const script = iframe?.contentDocument?.createElement('script');
+        if(script){
+            script.innerHTML = `
+                (function () {
+                    window.print();
+                    window.onafterprint = () => {
+                        window.parent.document.querySelector('#view-print-param').remove();
+                    };
+                }())
+            `;
+            iframe?.contentDocument?.body.append(script);
+        }
+
      }
 }

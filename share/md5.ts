@@ -27,7 +27,7 @@ export class Md5Util {
     return Md5Util.binl2str(Md5Util.core_hmac_md5(key, data));
   }
 
-  private static core_md5(x, len) {
+  private static core_md5(x: any, len: any) {
     x[len >> 5] |= 0x80 << ((len) % 32);
     x[(((len + 64) >>> 9) << 4) + 14] = len;
 
@@ -119,27 +119,27 @@ export class Md5Util {
 
   }
 
-  private static md5_cmn(q, a, b, x, s, t) {
+  private static md5_cmn(q: any, a: any, b: any, x: any, s: any, t: any) {
     return Md5Util.safe_add(Md5Util.bit_rol(Md5Util.safe_add(Md5Util.safe_add(a, q), Md5Util.safe_add(x, t)), s), b);
   }
 
-  private static md5_ff(a, b, c, d, x, s, t) {
+  private static md5_ff(a: any, b: any, c: any, d: any, x: any, s: any, t: any) {
     return Md5Util.md5_cmn((b & c) | ((~b) & d), a, b, x, s, t);
   }
 
-  private static md5_gg(a, b, c, d, x, s, t) {
+  private static md5_gg(a: any, b: any, c: any, d: any, x: any, s: any, t: any) {
     return Md5Util.md5_cmn((b & d) | (c & (~d)), a, b, x, s, t);
   }
 
-  private static md5_hh(a, b, c, d, x, s, t) {
+  private static md5_hh(a: any, b: any, c: any, d: any, x: any, s: any, t: any) {
     return Md5Util.md5_cmn(b ^ c ^ d, a, b, x, s, t);
   }
 
-  private static md5_ii(a, b, c, d, x, s, t) {
+  private static md5_ii(a: any, b: any, c: any, d: any, x: any, s: any, t: any) {
     return Md5Util.md5_cmn(c ^ (b | (~d)), a, b, x, s, t);
   }
 
-  private static core_hmac_md5(key, data) {
+  private static core_hmac_md5(key: any, data: any) {
     let bkey = Md5Util.str2binl(key);
     if (bkey.length > 16) {
       bkey = Md5Util.core_md5(bkey, key.length * Md5Util.chrsz);
@@ -155,17 +155,17 @@ export class Md5Util {
     return Md5Util.core_md5(opad.concat(hash), 512 + 128);
   }
 
-  private static safe_add(x, y) {
+  private static safe_add(x: any, y: any) {
     let lsw = (x & 0xFFFF) + (y & 0xFFFF);
     let msw = (x >> 16) + (y >> 16) + (lsw >> 16);
     return (msw << 16) | (lsw & 0xFFFF);
   }
 
-  private static bit_rol(num, cnt) {
+  private static bit_rol(num: any, cnt: any) {
     return (num << cnt) | (num >>> (32 - cnt));
   }
 
-  private static str2binl(str) {
+  private static str2binl(str: any) {
     let bin = Array();
     let mask = (1 << Md5Util.chrsz) - 1;
     for (let i = 0; i < str.length * Md5Util.chrsz; i += Md5Util.chrsz) {
@@ -174,7 +174,7 @@ export class Md5Util {
     return bin;
   }
 
-  private static binl2str(bin) {
+  private static binl2str(bin: any) {
     let str = '';
     let mask = (1 << Md5Util.chrsz) - 1;
     for (let i = 0; i < bin.length * 32; i += Md5Util.chrsz) {
@@ -183,7 +183,7 @@ export class Md5Util {
     return str;
   }
 
-  private static binl2hex(binarray) {
+  private static binl2hex(binarray: any) {
     let hex_tab = Md5Util.hexcase ? '0123456789ABCDEF' : '0123456789abcdef';
     let str = '';
     for (let i = 0; i < binarray.length * 4; i++) {
@@ -193,7 +193,7 @@ export class Md5Util {
     return str;
   }
 
-  private static binl2b64(binarray) {
+  private static binl2b64(binarray: any) {
     let tab = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
     let str = '';
     for (let i = 0; i < binarray.length * 4; i += 3) {
