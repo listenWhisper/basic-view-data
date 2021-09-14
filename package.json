@@ -7,8 +7,6 @@
 	],
 	"scripts": {
 		"tsc": "tsc -p ./",
-		"test": "echo \"Error: no test specified\" && exit 1",
-		"view-publish": "npm publish",
 		"patch-publish": "npm run tsc && copy package.json dist && cd dist && npm version patch && npm publish"
 	},
 	"repository": {
