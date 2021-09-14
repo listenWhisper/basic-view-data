@@ -3,6 +3,11 @@ import {RequestTypeEnum} from '../enums';
 import {EnumType, UtilTools} from '../share';
 
 export class RequestService {
+    constructor(
+        private http?: any
+    ) {
+    }
+
     private _proxy = ''; // 代理地址
 
     public get proxy() {
@@ -19,7 +24,7 @@ export class RequestService {
         return this._func;
     }
 
-    public set func(func: () => {}) {
+    public set func(func : any) {
         this._func = func;
     }
 
@@ -85,11 +90,30 @@ export class RequestService {
     }
 
     private request(options: Record<string, any>) {
-        this._func(options);
+        switch (this.requestType) {
+            case RequestTypeEnum.angular:
+                this.angularRequest(options);
+                break;
+            case RequestTypeEnum.uni:
+                this.uniRequest(options);
+                break;
+            case RequestTypeEnum.wx:
+                this.wxRequest(options);
+                break;
+            case RequestTypeEnum.vue:
+                this.vueRequest(options);
+                break;
+            default:
+                throw new Error('未找到定向请求,请更改请求类型');
+        }
     }
 
     private angularRequest(options: Record<string, any>) {
+        this.http.post(options?.url, options?.data, options?.header).subscribe((res: any) => {
+            options?.success(res);
+        });
     }
+
 
     private uniRequest(options: Record<string, any>) {
         // @ts-ignore
