@@ -14,6 +14,11 @@ export class RequestService{
     private _requestType: EnumType<RequestTypeEnum> = RequestTypeEnum.angular; // 请求方式 根据不同环境 不同设置
     private _contentType: Record<string, any> = { 'content-type': 'application/x-www-form-urlencoded' } // 默认请求头
 
+    constructor(
+        private http: HttpClient
+    ) {
+    }
+
     public get requestType(){
         return this._requestType;
     }
@@ -99,8 +104,7 @@ export class RequestService{
     }
 
     private angularRequest(options: Record<string, any>){
-        const http: HttpClient = new HttpClient();
-        http.post(options?.url, options?.data, options?.header).subscribe((res: any) => {
+        this.http.post(options?.url, options?.data, options?.header).subscribe((res: any) => {
             options?.success(res);
         })
     }
