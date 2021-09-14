@@ -3,9 +3,9 @@ import {RequestTypeEnum} from '../enums';
 import {EnumType} from '../share';
 // @ts-ignore
 import {HttpClient} from '@angular/common/http';
-
-
 // @ts-ignore
+import { Injectable } from '@angular/core';
+
 @Injectable({
     providedIn: 'root',
 })
