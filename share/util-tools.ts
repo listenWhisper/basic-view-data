@@ -10,6 +10,11 @@ export class UtilTools {
         return (createRandom() + createRandom() + '-' + createRandom() + '-' + createRandom() + '-' + createRandom() + '-' + createRandom() + createRandom() + createRandom());
     }
 
+
+    public static createBasicViewListItems<T>(list: T[]) {
+        return {_Items: list}
+    }
+
     /**
      * 文件下载
      * @param url 文件地址
