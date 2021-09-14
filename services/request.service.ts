@@ -4,6 +4,11 @@ import {EnumType} from '../share';
 // @ts-ignore
 import {HttpClient} from '@angular/common/http';
 
+
+// @ts-ignore
+@Injectable({
+    providedIn: 'root',
+})
 export class RequestService{
     private _proxy = ""; // 代理地址
     private _requestType: EnumType<RequestTypeEnum> = RequestTypeEnum.angular; // 请求方式 根据不同环境 不同设置
