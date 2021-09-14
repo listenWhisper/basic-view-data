@@ -52,7 +52,6 @@ export class RequestService{
     }
 
     private requestOption<T>(options: Record<string, any> = {}): Promise<any> {
-        // @ts-ignore
         return new Promise((
             resolve: (res: T) => void,
             reject: (err: { Code?: string; Msg?: string; Stacks?: string }) => void
@@ -94,7 +93,7 @@ export class RequestService{
 
     private angularRequest(options: Record<string, any>){
         const http: HttpClient = new HttpClient();
-        http.post(options?.url, options?.data, options?.header).subscribe(res => {
+        http.post(options?.url, options?.data, options?.header).subscribe((res: any) => {
             options?.success(res);
         })
     }

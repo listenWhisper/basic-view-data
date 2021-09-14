@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./",
+    "outDir": "./dist",
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "declaration": true, //生成相应的 .d.ts文件。
+    "noImplicitReturns": true,
+    "removeComments": true, //删除所有注释，除了以 /!*开头的版权信息。
+    "emitDecoratorMetadata": true, //给源码里的装饰器声明加上设计类型元数据。
+    "experimentalDecorators": true, //启用实验性的ES装饰器。
+    "noFallthroughCasesInSwitch": true,
+    "sourceMap": true,
+    "downlevelIteration": true,
+    "moduleResolution": "node",
+    "importHelpers": true,
+    "target": "es2017",
+    "module": "ESNext",
+    "lib": [
+      "es2018",
+      "dom"
+    ]
+  }
+}
