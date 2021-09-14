@@ -1,6 +1,6 @@
 {
 	"name": "basic-view-data",
-	"version": "0.0.12",
+	"version": "0.0.21",
 	"description": "basic-view-data",
 	"keywords": [
 		"基础视图数据"
@@ -9,7 +9,7 @@
 		"tsc": "tsc -p ./",
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"view-publish": "npm publish",
-		"patch-publish": "cd dist && npm version patch && npm publish"
+		"patch-publish": "npm run tsc && copy package.json dist && cd dist && npm version patch && npm publish"
 	},
 	"repository": {
 		"type": "git",
