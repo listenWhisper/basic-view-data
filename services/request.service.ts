@@ -2,14 +2,8 @@ import {ErrorResponse} from '../domains/error-response.domain';
 import {RequestTypeEnum} from '../enums';
 import {EnumType, UtilTools} from '../share';
 // @ts-ignore
-import {Injectable} from '@angular/core';
-// @ts-ignore
 import {HttpClient} from '@angular/common/http';
 
-
-@Injectable({
-    providedIn: 'root',
-})
 export class RequestService {
     constructor(
         private http: HttpClient
@@ -111,7 +105,6 @@ export class RequestService {
             options?.success(res);
         });
     }
-
 
     private uniRequest(options: Record<string, any>) {
         // @ts-ignore
