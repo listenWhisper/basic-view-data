@@ -33,6 +33,11 @@ export class UtilTools {
         const a = document.createElement('a');
         a.href = url;
         a.target = target;
+        a.click();
+     }
+
+     public static timestamp(data: string): string{
+         return `${data}${data.indexOf('?') > 0 ? '&': '?'}=${new Date().getTime()}`
      }
 
     /**

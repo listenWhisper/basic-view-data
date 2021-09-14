@@ -1,6 +1,6 @@
 import {ErrorResponse} from '../domains/error-response.domain';
 import {RequestTypeEnum} from '../enums';
-import {EnumType} from '../share';
+import {EnumType, UtilTools} from '../share';
 // @ts-ignore
 import {HttpClient} from '@angular/common/http';
 // @ts-ignore
@@ -39,6 +39,7 @@ export class RequestService{
     }
 
     public get<T>(url: string, data: Record<string, any> = {}, header: Record<string, any> = {}){
+        url = UtilTools.timestamp(url);
         return this.requestOption<T>({
             method: 'GET',
             url,
@@ -48,6 +49,7 @@ export class RequestService{
     }
 
     public post<T>(url: string, data: Record<string, any> = {}, header: Record<string, any> = {}){
+        url = UtilTools.timestamp(url);
         return this.requestOption<T>({
             method: 'POST',
             url,
