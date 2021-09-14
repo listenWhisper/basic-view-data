@@ -109,7 +109,7 @@ export class RequestService {
     }
 
     private angularRequest(options: Record<string, any>) {
-        this.http.post(options?.url, options?.data, options?.header).subscribe((res: any) => {
+        this.http.request(options.method, options.url, options).subscribe((res: any) => {
             options?.success(res);
         });
     }
