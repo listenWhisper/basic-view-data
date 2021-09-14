@@ -1,15 +1,8 @@
 import {ErrorResponse} from '../domains/error-response.domain';
 import {RequestTypeEnum} from '../enums';
 import {EnumType, UtilTools} from '../share';
-// @ts-ignore
-import {HttpClient} from '@angular/common/http';
 
 export class RequestService {
-    constructor(
-        private http: HttpClient
-    ) {
-    }
-
     private _proxy = ''; // 代理地址
 
     public get proxy() {
@@ -96,9 +89,6 @@ export class RequestService {
     }
 
     private angularRequest(options: Record<string, any>) {
-        this.http.post(options?.url, options?.data, options?.header).subscribe((res: any) => {
-            options?.success(res);
-        });
     }
 
     private uniRequest(options: Record<string, any>) {
