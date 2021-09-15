@@ -1,4 +1,3 @@
-import {ErrorResponse} from '../domains/error-response.domain';
 import {RequestTypeEnum} from '../enums';
 import {EnumType, UtilTools} from '../share';
 
@@ -38,6 +37,16 @@ export class RequestService {
         this._requestType = requestType;
     }
 
+    private _optionParam: Record<any, any> = {};
+
+    public get optionParam() {
+        return this._optionParam;
+    }
+
+    public set optionParam(optionParam: Record<string, any>) {
+        this._optionParam = optionParam;
+    }
+
     private _contentType: Record<string, any> = {'content-type': 'application/x-www-form-urlencoded'}; // 默认请求头
 
     public get contentType() {
@@ -48,24 +57,28 @@ export class RequestService {
         this._contentType = contentType;
     }
 
-    public get<T>(url: string, data: Record<string, any> = {}, header: Record<string, any> = {}) {
+    public get<T>(url: string, data: Record<string, any> = {}, header: Record<string, any> = {}, ) {
         url = UtilTools.timestamp(url);
-        return this.requestOption<T>({
-            method: 'GET',
-            url,
-            header: Object.assign(this.contentType, header),
-            data
-        });
-    }
-
-    public post<T>(url: string, data: Record<string, any> = {}, header: Record<string, any> = {}) {
-        url = UtilTools.timestamp(url);
-        return this.requestOption<T>({
+        let options = {
             method: 'POST',
             url,
             header: Object.assign(this.contentType, header),
             data
-        },);
+        }
+        Object.assign(options, this.optionParam);
+        return this.requestOption<T>(options);
+    }
+
+    public post<T>(url: string, data: Record<string, any> = {}, header: Record<string, any> = {}) {
+        url = UtilTools.timestamp(url);
+        let options = {
+            method: 'POST',
+            url,
+            header: Object.assign(this.contentType, header),
+            data
+        }
+        Object.assign(options, this.optionParam);
+        return this.requestOption<T>(options);
     }
 
     private requestOption<T>(options: Record<string, any> = {}): Promise<any> {
