@@ -15,6 +15,14 @@ export class UtilTools {
         return {_Items: list}
     }
 
+    public static dateSupplement(zero: number): string{
+        let date = zero.toString();
+        if (zero.toString().length == 1) {
+            date = `0${zero}`;
+        }
+        return date;
+    }
+
     /**
      * 文件下载
      * @param url 文件地址
