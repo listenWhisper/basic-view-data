@@ -75,15 +75,16 @@ export class RequestService {
         ) => {
             options.success = (response: any) => {
                 if (response.statusCode !== 200) {
-                    resolve(response);
+                    reject(response);
                 }
-                if (typeof response.data === 'object') {
-                    if (response.data.hasOwnProperty('error_response')) {
-                        response.data = new ErrorResponse(response.data.error_response);
-                        reject(response);
-                    }
-                    resolve(response);
-                }
+                resolve(response);
+                // if (typeof response.data === 'object') {
+                //     if (response.data.hasOwnProperty('error_response')) {
+                //         response.data = new ErrorResponse(response.data.error_response);
+                //         reject(response);
+                //     }
+                //     resolve(response);
+                // }
             };
             this.request(options);
         });
