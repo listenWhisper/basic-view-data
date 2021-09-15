@@ -57,10 +57,10 @@ export class RequestService {
         this._contentType = contentType;
     }
 
-    public get<T>(url: string, data: Record<string, any> = {}, header: Record<string, any> = {}, ) {
+    public get<T>(url: string, data: Record<string, any> = {}, header: Record<string, any> = {}) {
         url = UtilTools.timestamp(url);
         let options = {
-            method: 'POST',
+            method: 'GET',
             url,
             header: Object.assign(this.contentType, header),
             data
@@ -89,12 +89,11 @@ export class RequestService {
             options.success = (response: any) => {
                 if (response.statusCode !== 200) {
                     reject(response);
-                }else{
-                    resolve(response);
                 }
+                resolve(response);
             };
             options.fail = (err: any) => {
-                reject(err);
+                resolve(err);
             }
             this.request(options);
         });
