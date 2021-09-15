@@ -78,14 +78,10 @@ export class RequestService {
                     reject(response);
                 }
                 resolve(response);
-                // if (typeof response.data === 'object') {
-                //     if (response.data.hasOwnProperty('error_response')) {
-                //         response.data = new ErrorResponse(response.data.error_response);
-                //         reject(response);
-                //     }
-                //     resolve(response);
-                // }
             };
+            options.fail = (err: any) => {
+                resolve(err);
+            }
             this.request(options);
         });
     }
@@ -113,6 +109,8 @@ export class RequestService {
         // @ts-ignore
         this.http.request(options.method, options.url, options).subscribe((res: any) => {
             options?.success(res);
+        }, (err: any) => {
+            options?.fail(err);
         });
     }
 
