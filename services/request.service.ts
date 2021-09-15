@@ -87,13 +87,10 @@ export class RequestService {
             reject: (err: { Code?: string; Msg?: string; Stacks?: string }) => void
         ) => {
             options.success = (response: any) => {
-                if (response.statusCode !== 200) {
-                    reject(response);
-                }
                 resolve(response);
             };
             options.fail = (err: any) => {
-                resolve(err);
+                reject(err);
             }
             this.request(options);
         });
