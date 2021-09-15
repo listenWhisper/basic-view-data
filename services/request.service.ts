@@ -89,11 +89,12 @@ export class RequestService {
             options.success = (response: any) => {
                 if (response.statusCode !== 200) {
                     reject(response);
+                }else{
+                    resolve(response);
                 }
-                resolve(response);
             };
             options.fail = (err: any) => {
-                resolve(err);
+                reject(err);
             }
             this.request(options);
         });
